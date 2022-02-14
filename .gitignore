@@ -1,2 +1,5 @@
 .idea
+.env
 venv
+database
+db_SQLite3.db

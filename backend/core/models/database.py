@@ -1,19 +1,20 @@
 import os
+from typing import Generator
 
-from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey, Boolean, UniqueConstraint
+from sqlalchemy import create_engine, Column, Integer
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship, sessionmaker
+from sqlalchemy.orm import sessionmaker
+
+from backend.core.settings import settings
+
+engine = create_engine(settings.DATABASE_URI)
+SessionLocal = sessionmaker(bind=engine)
+session = SessionLocal()
+
+DataBase = declarative_base()
 
 
-DATABASE_NAME = 'db_SQLite3.db'
-engine = create_engine(f'sqlite:///{os.path.dirname(__file__)}\\{DATABASE_NAME}')
-Session = sessionmaker(bind=engine)
-session = Session()
-
-Base = declarative_base()
-
-
-class BaseModel(Base):
+class DataBaseModel(DataBase):
     __abstract__ = True
     id = Column(Integer, primary_key=True, autoincrement=True)
 
@@ -57,3 +58,19 @@ class BaseModel(Base):
         except Exception as e:
             session.rollback()
             raise e
+
+
+def init_db():
+    if not os.path.exists(settings.DATABASE_URI):
+        DataBase.metadata.create_all(engine)
+    else:
+        DataBase.metadata.create_all(engine)
+
+
+# Dependency injection
+def get_db() -> Generator:
+    try:
+        db = SessionLocal()
+        yield db
+    finally:
+        db.close()
