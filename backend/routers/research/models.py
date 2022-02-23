@@ -1,14 +1,12 @@
-import datetime
-
 from sqlalchemy import Column, Integer, String, DateTime
+from backend.core.models.database import DataBase
 
-from backend.core.models.database import DataBaseModel
 
-
-class Research(DataBaseModel):
+class Research(DataBase):
     __tablename__ = 'research'
+    id = Column(Integer, primary_key=True, autoincrement=True)
     reg_number = Column(Integer)
-    reg_date = Column(DateTime)
+    reg_date = Column(String)
     initiator_department = Column(String)
     initiator_post = Column(String)
     initiator_rank = Column(String)
@@ -22,7 +20,7 @@ class Research(DataBaseModel):
     executor_name = Column(String)
     executor_patronymic = Column(String)
     event_number = Column(String)
-    formation_date = Column(DateTime)
+    formation_date = Column(String)
     article = Column(String)
     plot = Column(String)
     incident_date = Column(String)

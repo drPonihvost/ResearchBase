@@ -1,12 +1,10 @@
-import datetime
-
 from pydantic import BaseModel
 from datetime import datetime
 
 
 class ResearchSchema(BaseModel):
     reg_number: int
-    reg_date: datetime
+    reg_date: str
     initiator_department: str
     initiator_post: str
     initiator_rank: str
@@ -23,5 +21,16 @@ class ResearchSchema(BaseModel):
     formation_date: str
     article: str
     plot: str
-    incident_date: datetime
+    incident_date: str
     address: str
+
+    class Config:
+        orm_mode = True
+
+
+class ResearchSchemaList(ResearchSchema):
+    id: int
+
+
+class ResearchSchemaCreate(ResearchSchema):
+    pass

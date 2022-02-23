@@ -1,32 +1,27 @@
 from fastapi import APIRouter
 from fastapi.params import Depends
-
 from sqlalchemy.orm import Session
+from typing import List
 
-from backend.routers.research.schemas import ResearchSchema
-from backend.routers.research.models import Research
-
-from backend.core.models.database import get_db
+from backend.core.utils import get_db
+from backend.routers.research.services import *
+from backend.routers.research.schemas import ResearchSchemaCreate, ResearchSchemaList
 
 router = APIRouter()
 
 tag = ['Research']
 
 
-@router.get('/researches', tags=tag)
-async def research():
-    return {'researches': ['routers']}
+@router.get('/', tags=tag, response_model=List[ResearchSchemaList])
+async def researches(db: Session = Depends(get_db)):
+    return get_all_research(db)
 
 
-@router.post('/researches', tags=tag)
-async def create_research(research_data: ResearchSchema, db: Session = Depends(get_db)):
-    research = Research(**research_data.dict())
-    db.add(research)
-    db.commit()
-    db.refresh(research)
-    return research
+@router.post('/', tags=tag)
+async def researches(item: ResearchSchemaCreate, db: Session = Depends(get_db)):
+    return create_research(db, item)
 
 
-@router.get('/researches/{research_id}', tags=tag)
-async def research(research_id: int):
-    return {'researches': research_id}
+# @router.get('/{research_id}', tags=tag)
+# async def research(research_id: int):
+#     return {'researches': research_id}
