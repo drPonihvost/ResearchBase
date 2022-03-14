@@ -1,10 +1,10 @@
 from pydantic import BaseModel
-from datetime import datetime
+import datetime
 
 
 class ResearchSchema(BaseModel):
     reg_number: int
-    reg_date: str
+    date_of_record: datetime.date
     initiator_department: str
     initiator_post: str
     initiator_rank: str
@@ -18,11 +18,14 @@ class ResearchSchema(BaseModel):
     executor_name: str
     executor_patronymic: str
     event_number: str
-    formation_date: str
+    formation_date: datetime.date
     article: str
     plot: str
-    incident_date: str
+    incident_date: datetime.date
     address: str
+    relative_search: bool
+    reg_date: datetime.date = None
+
 
     class Config:
         orm_mode = True

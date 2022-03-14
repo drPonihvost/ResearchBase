@@ -8,4 +8,4 @@ class Person(BaseModel):
     patronymic: str
     birthday: date
     birthplace: str
-    relation: str = ''
+    relation: str = None

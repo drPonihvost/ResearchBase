@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, Date, Boolean
 from backend.core.models.database import DataBase
 
 
@@ -6,7 +6,7 @@ class Research(DataBase):
     __tablename__ = 'research'
     id = Column(Integer, primary_key=True, autoincrement=True)
     reg_number = Column(Integer)
-    reg_date = Column(String)
+    date_of_record = Column(Date)
     initiator_department = Column(String)
     initiator_post = Column(String)
     initiator_rank = Column(String)
@@ -20,8 +20,11 @@ class Research(DataBase):
     executor_name = Column(String)
     executor_patronymic = Column(String)
     event_number = Column(String)
-    formation_date = Column(String)
+    formation_date = Column(Date)
     article = Column(String)
     plot = Column(String)
-    incident_date = Column(String)
+    incident_date = Column(Date)
     address = Column(String)
+    relative_search = Column(Boolean, default=False)
+    reg_date = Column(Date)
+

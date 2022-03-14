@@ -1,11 +1,11 @@
 from sqlalchemy import Column, String, Date, Boolean, Integer, ForeignKey
 
-from backend.core.models.database import DataBaseModel
+from backend.core.models.database import DataBase
 from backend.routers.research.models import Research
 from sqlalchemy.orm import relationship
 
 
-class Person(DataBaseModel):
+class Person(DataBase):
     __tablename__ = 'person'
     surname = Column(String)
     name = Column(String)
