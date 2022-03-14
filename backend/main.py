@@ -1,5 +1,6 @@
 import uvicorn
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from starlette.requests import Request
 from starlette.responses import Response
 
@@ -19,6 +20,7 @@ app = FastAPI(
     openapi_tags=settings.TAGS_METADATA
 )
 
+app.mount('/static', StaticFiles(directory='static'), name='static')
 
 @app.middleware('http')
 async def db_session_middleware(request: Request, call_next):

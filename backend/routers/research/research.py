@@ -14,8 +14,6 @@ router = APIRouter()
 
 tag = ['Research']
 
-router.mount('/static', StaticFiles(directory='routers/research/static'), name='static')
-
 templates = Jinja2Templates(directory='routers/research/templates')
 
 
