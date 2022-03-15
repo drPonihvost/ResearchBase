@@ -28,9 +28,14 @@ async def research(request: Request, db: Session = Depends(get_db)):
 #     return get_all_research(db)
 #
 #
-# @router.post('/', tags=tag)
-# async def researches(item: ResearchSchemaCreate, db: Session = Depends(get_db)):
-#     return create_research(db, item)
+@router.post('/', tags=tag)
+async def research(item: ResearchSchemaCreate, db: Session = Depends(get_db)):
+    return create_research(db, item)
+
+
+@router.delete('/{id}', tags=tag)
+async def research(id: int, db: Session = Depends(get_db)):
+    return delete_research(db, id)
 #
 #
 # @router.get('/{research_id}', tags=tag, response_model=ResearchSchemaList)

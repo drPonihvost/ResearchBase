@@ -14,6 +14,11 @@ def get_research_by_id(db: Session, research_id):
     return db.query(Research).get(research_id)
 
 
+def delete_research(db: Session, research_id):
+    db.delete(get_research_by_id(db, research_id))
+    db.commit()
+
+
 def create_research(db: Session, item: ResearchSchemaCreate):
     research = Research(**item.dict())
     db.add(research)

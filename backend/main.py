@@ -22,6 +22,7 @@ app = FastAPI(
 
 app.mount('/static', StaticFiles(directory='static'), name='static')
 
+
 @app.middleware('http')
 async def db_session_middleware(request: Request, call_next):
     response = Response('Internal server error', status_code=500)

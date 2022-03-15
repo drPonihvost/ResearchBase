@@ -3,7 +3,51 @@
 
 {% block content %}
 <div id="content">
-   <h1>Журнал исследований</h1>
-   {{ data }}
+   <div class="container-fluid">
+      <table class="table" style="text-align: center; line-height: 1; vertical-align: middle;">
+         <thead>
+            <tr style="text-align: center;">
+               <th scope="col">Выбор</th>
+               <th scope="col">Номер исследования</th>
+               <th scope="col">Дата регистрации</th>
+               <th scope="col">Сведения об инициаторе исследования</th>
+               <th scope="col">№ уголовного дела (материалы проверки), вид перступления (правонарушения)</th>
+               <th scope="col">Дата и адрес совершения перступления (правонарушения)</th>
+               <th scope="col">Количество образцов</th>
+            </tr>
+         </thead>
+         <tbody style="vertical-align: top;">
+            {% if data %}
+               {% for research in data %}
+               <tr>
+                  <th scope="row" style="vertical-align: middle;">
+                     <input type="checkbox" class="form-check-input" value="{{ research.id }}">
+                  </th>
+                  <td>{{ research.reg_number }}</td>
+                  <td>{{ research.reg_date }}</td>
+                  <td>
+                     <p>{{ research.initiator_post }} {{ research.initiator_department }}<br>
+                     {{ research.initiator_rank }}<br>
+                     {{research.initiator_name[0].upper()}}.{{research.initiator_patronymic[0].upper()}}. {{research.initiator_surname.title()}}</p>
+                  </td>
+                  <td>
+                     <p>
+                        {{ research.event_number }}<br>
+                        ст. {{ research.article }}<br>
+                        {{ research.plot }}
+                     </p>
+                  </td>
+                  <td>
+                     <p>
+                        {{ research.incident_date }}<br>
+                        {{ research.address }}
+                     </p>
+                  </td>
+               </tr>
+               {% endfor %}
+            {% endif %}
+         </tbody>
+      </table>
+   </div>
 </div>
 {% endblock %}
