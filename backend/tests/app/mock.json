@@ -1,0 +1,26 @@
+[
+  {
+    "reg_number": 185,
+    "date_of_record": "2022-03-15",
+    "initiator_department": "МВД по Республике Хакасия",
+    "initiator_post": "Начальник УУР",
+    "initiator_rank": "полковник полиции",
+    "initiator_surname": "Кунстман",
+    "initiator_name": "Александр",
+    "initiator_patronymic": "Викторович",
+    "executor_department": "МВД по Республике Хакасия",
+    "executor_post": "Оперуполномоченный УУР",
+    "executor_rank": "капитан полиции",
+    "executor_surname": "Пупкин",
+    "executor_name": "Василий",
+    "executor_patronymic": "Васильевич",
+    "event_number": "у/д № 12101950001002434",
+    "formation_date": "2021-07-30",
+    "article": "213 УК РФ",
+    "plot": "Хулиганские действия в отношении Лыткина",
+    "incident_date": "2021-07-30",
+    "address": "г. Абакан, ул. Вяткина, д. 33А",
+    "relative_search": false,
+    "reg_date": "2022-03-15"
+  }
+]

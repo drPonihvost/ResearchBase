@@ -1,10 +1,18 @@
-from sqlalchemy import Column, Integer, String, Date, Boolean
-from backend.core.models.database import DataBase
+from sqlalchemy import Column, Integer, String, Date, Boolean, ForeignKey
+from sqlalchemy.orm import relationship
+
+from backend.core.database import DataBase
 
 
-class Research(DataBase):
-    __tablename__ = 'research'
+class BaseModel(DataBase):
+    __abstract__ = True
+
     id = Column(Integer, primary_key=True, autoincrement=True)
+
+
+class Research(BaseModel):
+    __tablename__ = 'researches'
+
     reg_number = Column(Integer)
     date_of_record = Column(Date)
     initiator_department = Column(String)
@@ -28,3 +36,19 @@ class Research(DataBase):
     relative_search = Column(Boolean, default=False)
     reg_date = Column(Date)
 
+    persons = relationship('Person', back_populates='researches')
+
+
+class Person(BaseModel):
+    __tablename__ = 'persons'
+
+    surname = Column(String)
+    name = Column(String)
+    patronymic = Column(String)
+    male = Column(Boolean)
+    birthday = Column(Date)
+    birthplace = Column(String)
+    relation = Column(String)
+    research_id = Column(Integer, ForeignKey('researches.id'))
+
+    researches = relationship('Research', back_populates='persons')

@@ -4,10 +4,13 @@ from fastapi.staticfiles import StaticFiles
 from starlette.requests import Request
 from starlette.responses import Response
 
+from backend.core.database import SessionLocal
 from backend.routers.routers import routers
-from backend.core.models.database import SessionLocal, init_db
 from backend.core.settings import settings
+from backend.core.database import DataBase, engine
+# from backend.routers.research import models as research_models
 
+DataBase.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title=settings.TITLE,
@@ -23,20 +26,19 @@ app = FastAPI(
 app.mount('/static', StaticFiles(directory='static'), name='static')
 
 
-@app.middleware('http')
-async def db_session_middleware(request: Request, call_next):
-    response = Response('Internal server error', status_code=500)
-    try:
-        request.state.db = SessionLocal()
-        response = await call_next(request)
-    finally:
-        request.state.db.close()
-    return response
+# @app.middleware('http')
+# async def db_session_middleware(request: Request, call_next):
+#     response = Response('Internal server error', status_code=500)
+#     try:
+#         request.state.db = SessionLocal()
+#         response = await call_next(request)
+#     finally:
+#         request.state.db.close()
+#     return response
 
 
 app.include_router(routers)
 
 
 if __name__ == '__main__':
-    init_db()
     uvicorn.run('main:app', reload=True)
