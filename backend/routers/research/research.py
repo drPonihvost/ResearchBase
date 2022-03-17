@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Query, Request, HTTPException
 from fastapi.params import Depends
-from fastapi.staticfiles import StaticFiles
 from starlette.responses import FileResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
@@ -15,7 +14,7 @@ router = APIRouter()
 
 tag = ['Research']
 
-templates = Jinja2Templates(directory='routers/research/templates')
+templates = Jinja2Templates(directory='templates/research')
 
 
 @router.get('/', tags=tag, response_model=List[schemas.Research])
