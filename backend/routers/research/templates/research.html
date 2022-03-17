@@ -14,6 +14,7 @@
                <th scope="col">№ уголовного дела (материалы проверки), вид перступления (правонарушения)</th>
                <th scope="col">Дата и адрес совершения перступления (правонарушения)</th>
                <th scope="col">Количество образцов</th>
+               <th scope="col">Действия</th>
             </tr>
          </thead>
          <tbody style="vertical-align: top;">
@@ -42,6 +43,13 @@
                         {{ research.incident_date }}<br>
                         {{ research.address }}
                      </p>
+                  </td>
+                  <td></td>
+                  <td>
+                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <a href="#" class="btn btn-primary">Редактировать</a>
+                        <a href="{{ request.url_for('get_persons', research_id=research.id) }}" class="btn btn-primary">Просмотр лиц</a>
+                     </div>
                   </td>
                </tr>
                {% endfor %}
